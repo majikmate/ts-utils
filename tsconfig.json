@@ -1,0 +1,18 @@
+{
+  // Builds src/ into dist/ (JavaScript and type declarations). dist/ is
+  // committed, because npm installs this package straight from GitHub and
+  // runs no build step there.
+  "compilerOptions": {
+    "strict": true,
+    "module": "nodenext",
+    "target": "es2023",
+    "lib": ["es2024"],
+    "types": ["node"],
+    "rootDir": "src",
+    "outDir": "dist",
+    "declaration": true,
+    "rewriteRelativeImportExtensions": true,
+    "verbatimModuleSyntax": true
+  },
+  "include": ["src"]
+}
