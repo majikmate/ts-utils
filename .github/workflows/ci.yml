@@ -1,0 +1,35 @@
+# Builds and tests the package on every push and pull request. Fails when the
+# committed dist/ does not match a fresh build of src/.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [24, 26]
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm ci
+      - run: npm run build
+      - name: dist/ matches src/
+        run: |
+          if [ -n "$(git status --porcelain -- dist)" ]; then
+            git status --short -- dist
+            echo "::error::dist/ is out of date: run npm run build and commit dist/"
+            exit 1
+          fi
+      - run: npm test
+      - name: Package content
+        run: npm pack --dry-run

@@ -1,0 +1,32 @@
+{
+  "name": "@majikmate/ts-utils",
+  "version": "1.0.0",
+  "description": "Small helpers for the majikmate TypeScript courses: prompt() for programs in the terminal",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/majikmate/ts-utils.git"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "node --test test/prompt.test.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^26.0.0",
+    "typescript": "6.0.3"
+  }
+}
